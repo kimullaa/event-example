@@ -16,6 +16,7 @@ import org.springframework.stereotype.Component;
 public class AfterSpring42listener {
 
     @EventListener
+    @Async
     public void processExecuteStartEvent(SlotStartEvent event) {
         log.info("after ver4.2 listen : " + event.getRotation());
     }
@@ -25,17 +26,20 @@ public class AfterSpring42listener {
      * 連鎖してイベントを発生させることができる
      */
     @EventListener(condition = "#event.rotation.id == 2")
+    @Async
     public FeverEvent conditionOn2(SlotStartEvent event) {
         log.info("fever event start");
         return new FeverEvent(event, event.getRotation());
     }
 
     @EventListener
+    @Async
     public void processContextClosedEvent(ContextClosedEvent event) {
         log.info("good bye");
     }
 
     @EventListener
+    @Async
     public void processFeverEvent(FeverEvent event) {
         log.info("fever! " + event.getRotation());
     }

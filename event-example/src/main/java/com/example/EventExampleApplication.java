@@ -14,6 +14,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 @SpringBootApplication
+@EnableAsync
 public class EventExampleApplication {
 
     public static void main(String[] args) {
@@ -29,4 +30,14 @@ public class EventExampleApplication {
             machine.execute();
         };
     }
+
+    @Bean
+    public TaskExecutor getTaskExecutor(){
+        ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
+        executor.setCorePoolSize(5);
+        executor.setMaxPoolSize(10);
+        executor.setQueueCapacity(100);
+        return executor;
+    }
+
 }
