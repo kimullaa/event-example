@@ -2,7 +2,7 @@
 Spring's Application Event Sample Code
 
 # branch
-sync  : master 
+sync  : master  
 async : async
 
 # run 
